@@ -23,6 +23,19 @@ public class FileSizeTest {
                 new FileSize("du -h --si -c files/ files/books files/films" +
                         " files/documents/doc3.txt files/films/action files/documents/doc1.txt").getSize()
         );
+        assertArrayEquals(
+                new String[]{"36,15KB", "18,86KB", "0,00B", "1,30KB", "2,51KB", "1,47KB", "60,29KB"},
+                new FileSize("du -h --si -c files/ files/books files/empty" +
+                        " files/documents/doc3.txt files/films/action files/documents/doc1.txt").getSize()
+        );
+        assertArrayEquals(
+                new String[]{"0,00B", "0,00B", "0,00B"},
+                new FileSize("du -h --si -c files/empty/empty.txt files/empty/").getSize()
+        );
+        assertArrayEquals(
+                new String[]{"0,00", "0,00"},
+                new FileSize("du -c files/empty/empty.txt").getSize()
+        );
     }
 
     @Test
